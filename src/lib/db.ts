@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Mongoose } from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/todo-app';
 
@@ -6,13 +6,29 @@ if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable');
 }
 
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+// Declare and type global.mongoose
+declare global {
+  var mongoose: {
+    conn: Mongoose | null;
+    promise: Promise<Mongoose> | null;
+  } | undefined;
 }
 
-async function connectDB() {
+// Use globalThis to avoid scope issues and ensure type safety
+const globalWithMongoose = globalThis as typeof globalThis & {
+  mongoose?: {
+    conn: Mongoose | null;
+    promise: Promise<Mongoose> | null;
+  };
+};
+
+if (!globalWithMongoose.mongoose) {
+  globalWithMongoose.mongoose = { conn: null, promise: null };
+}
+
+const cached = globalWithMongoose.mongoose;
+
+async function connectDB(): Promise<Mongoose> {
   if (cached.conn) {
     return cached.conn;
   }
@@ -22,9 +38,7 @@ async function connectDB() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
+    cached.promise = mongoose.connect(MONGODB_URI, opts);
   }
 
   try {

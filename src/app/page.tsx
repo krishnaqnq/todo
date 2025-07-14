@@ -50,32 +50,27 @@ export default function Home() {
     }
   };
 
-  const handleCreateTodo = async () => {
-    const title = prompt('Enter todo title:', 'Untitled Todo');
-    if (title !== null) {
-      try {
-        const response = await axios.post('/api/todos', { title, items: [] });
-        setTodos([response.data, ...todos]);
-        setSelectedTodo(response.data);
-        toast.success('Todo created successfully');
-      } catch (error) {
-        toast.error('Failed to create todo');
-      }
+  const handleCreateTodo = async (title: string) => {
+    try {
+      const response = await axios.post('/api/todos', { title, items: [] });
+      setTodos([response.data, ...todos]);
+      setSelectedTodo(response.data);
+      toast.success('Todo created successfully');
+    } catch (error) {
+      toast.error('Failed to create todo');
     }
   };
 
   const handleDeleteTodo = async (id: string) => {
-    if (confirm('Are you sure you want to delete this todo?')) {
-      try {
-        await axios.delete(`/api/todos/${id}`);
-        setTodos(todos.filter((todo) => todo._id !== id));
-        if (selectedTodo?._id === id) {
-          setSelectedTodo(null);
-        }
-        toast.success('Todo deleted successfully');
-      } catch (error) {
-        toast.error('Failed to delete todo');
+    try {
+      await axios.delete(`/api/todos/${id}`);
+      setTodos(todos.filter((todo) => todo._id !== id));
+      if (selectedTodo?._id === id) {
+        setSelectedTodo(null);
       }
+      toast.success('Todo deleted successfully');
+    } catch (error) {
+      toast.error('Failed to delete todo');
     }
   };
 
@@ -103,26 +98,60 @@ export default function Home() {
   };
 
   return (
-    <main className="flex h-screen overflow-hidden">
-      <SidePanel
-        todos={todos}
-        onTodoClick={(todo: Todo) => setSelectedTodo(todo)}
-        onCreateTodo={handleCreateTodo}
-        onDeleteTodo={handleDeleteTodo}
-        isMobile={isMobile}
-        isOpen={isSidePanelOpen}
-        setIsOpen={setIsSidePanelOpen}
-      />
-      <div className="flex-1 overflow-auto">
+    <main className="flex h-screen overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 shadow-lg">
+      <div 
+        data-aos="fade-right" 
+        data-aos-duration="800"
+      >
+        <SidePanel
+          todos={todos}
+          onTodoClick={(todo: Todo) => setSelectedTodo(todo)}
+          onCreateTodo={handleCreateTodo}
+          onDeleteTodo={handleDeleteTodo}
+          isMobile={isMobile}
+          isOpen={isSidePanelOpen}
+          setIsOpen={setIsSidePanelOpen}
+        />
+      </div>
+      <div 
+        className="flex-1 overflow-auto transition-all duration-300 ease-in-out"
+        data-aos="fade-left"
+        data-aos-delay="200"
+      >
         {selectedTodo ? (
           <TodoDetail todo={selectedTodo} onUpdateTodo={handleUpdateTodo} />
         ) : (
-          <div className="flex items-center justify-center h-full text-gray-500">
-            Select a todo from the sidebar or create a new one
+          <div className="flex flex-col items-center justify-center h-full text-slate-400 p-8">
+            <div 
+              className="max-w-md text-center p-8 rounded-xl bg-slate-800/80 backdrop-blur-sm shadow-xl border border-slate-700"
+              data-aos="zoom-in"
+              data-aos-delay="400"
+            >
+              <img 
+                src="/window.svg" 
+                alt="Todo" 
+                className="w-24 h-24 mx-auto mb-6 opacity-60 invert"
+                data-aos="flip-up"
+                data-aos-delay="600"
+              />
+              <h2 className="text-xl font-medium text-slate-200 mb-2">No Todo Selected</h2>
+              <p className="text-slate-400">
+                Select a todo from the sidebar or create a new one to get started
+              </p>
+            </div>
           </div>
         )}
       </div>
-      <Toaster position="bottom-right" />
+      <Toaster 
+        position="bottom-right" 
+        toastOptions={{
+          style: {
+            background: '#1e293b',
+            color: '#f1f5f9',
+            borderColor: '#334155'
+          }
+        }}
+      />
     </main>
   );
 }

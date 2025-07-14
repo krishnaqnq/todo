@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import { Todo } from '@/lib/models';
 
+// GET all todos
 export async function GET() {
   try {
     await connectDB();
@@ -12,6 +13,7 @@ export async function GET() {
   }
 }
 
+// CREATE a new todo
 export async function POST(request: NextRequest) {
   try {
     await connectDB();
