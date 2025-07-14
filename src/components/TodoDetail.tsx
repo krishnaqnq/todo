@@ -15,6 +15,7 @@ interface Todo {
   _id: string;
   title: string;
   items: Item[];
+  user: string;
 }
 
 interface TodoDetailProps {

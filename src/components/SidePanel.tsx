@@ -16,6 +16,7 @@ interface Todo {
   _id: string;
   title: string;
   items: Item[];
+  user: string;
 }
 
 interface SidePanelProps {
@@ -26,6 +27,7 @@ interface SidePanelProps {
   isMobile: boolean;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  isLoading?: boolean;
 }
 
 export default function SidePanel({
@@ -36,6 +38,7 @@ export default function SidePanel({
   isMobile,
   isOpen,
   setIsOpen,
+  isLoading = false,
 }: SidePanelProps) {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [newTodoTitle, setNewTodoTitle] = useState('');
@@ -78,39 +81,45 @@ export default function SidePanel({
         </button>
       </div>
       <div className="flex-1 overflow-y-auto">
-        <ul className="divide-y divide-slate-700">
-          {todos.map((todo, index) => (
-            <li 
-              key={todo._id} 
-              className="hover:bg-slate-700 transition-all duration-300"
-              data-aos="fade-up"
-              data-aos-delay={100 + index * 50}
-            >
-              <div className="flex items-center justify-between p-4">
-                <button
-                  onClick={() => onTodoClick(todo)}
-                  className="text-sm font-medium text-slate-200 hover:text-blue-300 transition-colors duration-300 flex-1 text-left"
-                >
-                  {todo.title}
-                </button>
-                <button
-                  onClick={() => handleDeleteClick(todo._id)}
-                  className="text-red-400 hover:text-red-300 transition-colors duration-300 ml-4 p-1.5 rounded-full hover:bg-slate-600"
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-          {todos.length === 0 && (
-            <li 
-              className="p-8 text-center text-slate-400"
-              data-aos="fade-up"
-            >
-              No todos yet. Create one to get started.
-            </li>
-          )}
-        </ul>
+        {isLoading ? (
+          <div className="flex justify-center items-center h-32">
+            <div className="animate-pulse text-slate-400">Loading todos...</div>
+          </div>
+        ) : (
+          <ul className="divide-y divide-slate-700">
+            {todos.map((todo, index) => (
+              <li 
+                key={todo._id} 
+                className="hover:bg-slate-700 transition-all duration-300"
+                data-aos="fade-up"
+                data-aos-delay={100 + index * 50}
+              >
+                <div className="flex items-center justify-between p-4">
+                  <button
+                    onClick={() => onTodoClick(todo)}
+                    className="text-sm font-medium text-slate-200 hover:text-blue-300 transition-colors duration-300 flex-1 text-left"
+                  >
+                    {todo.title}
+                  </button>
+                  <button
+                    onClick={() => handleDeleteClick(todo._id)}
+                    className="text-red-400 hover:text-red-300 transition-colors duration-300 ml-4 p-1.5 rounded-full hover:bg-slate-600"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            ))}
+            {todos.length === 0 && !isLoading && (
+              <li 
+                className="p-8 text-center text-slate-400"
+                data-aos="fade-up"
+              >
+                No todos yet. Create one to get started.
+              </li>
+            )}
+          </ul>
+        )}
       </div>
     </div>
   );
@@ -241,7 +250,7 @@ function CreateTodoModal({
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-800 p-6 text-left align-middle shadow-xl transition-all border border-slate-700">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-slate-200"
+                  className="text-lg  leading-6 font-bold text-yellow-400 "
                 >
                   Create New Todo
                 </Dialog.Title>

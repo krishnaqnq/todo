@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "aos/dist/aos.css"; // AOS styles
 import AOSInitializer from "@/components/AOSInitializer";
+import AuthProvider from "@/components/AuthProvider";
+import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,9 +29,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-slate-100`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-yellow-400`}
       >
-        <AOSInitializer>{children}</AOSInitializer>
+        <AuthProvider>
+          <AOSInitializer>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow">
+                {children}
+              </main>
+            </div>
+          </AOSInitializer>
+        </AuthProvider>
       </body>
     </html>
   );

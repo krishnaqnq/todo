@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { Toaster, toast } from 'react-hot-toast';
 import SidePanel from '@/components/SidePanel';
@@ -19,13 +21,24 @@ interface Todo {
   _id: string;
   title: string;
   items: Item[];
+  user: string;
 }
 
 export default function Home() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Redirect to sign in if not authenticated
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/auth/signin');
+    }
+  }, [status, router]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -38,15 +51,20 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    if (status === 'authenticated') {
+      fetchTodos();
+    }
+  }, [status]);
 
   const fetchTodos = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get('/api/todos');
       setTodos(response.data);
     } catch (error) {
       toast.error('Failed to fetch todos');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -97,8 +115,17 @@ export default function Home() {
     }
   };
 
+  // Show loading state or redirect to login
+  if (status === 'loading' || status === 'unauthenticated') {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-pulse text-slate-400">Loading...</div>
+      </div>
+    );
+  }
+
   return (
-    <main className="flex h-screen overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 shadow-lg">
+    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 shadow-lg">
       <div 
         data-aos="fade-right" 
         data-aos-duration="800"
@@ -111,6 +138,7 @@ export default function Home() {
           isMobile={isMobile}
           isOpen={isSidePanelOpen}
           setIsOpen={setIsSidePanelOpen}
+          isLoading={isLoading}
         />
       </div>
       <div 
@@ -136,7 +164,9 @@ export default function Home() {
               />
               <h2 className="text-xl font-medium text-slate-200 mb-2">No Todo Selected</h2>
               <p className="text-slate-400">
-                Select a todo from the sidebar or create a new one to get started
+                {todos.length > 0 
+                  ? 'Select a todo from the sidebar or create a new one to get started'
+                  : 'Create your first todo to get started'}
               </p>
             </div>
           </div>
@@ -152,6 +182,6 @@ export default function Home() {
           }
         }}
       />
-    </main>
+    </div>
   );
 }
