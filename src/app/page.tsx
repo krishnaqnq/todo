@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { Toaster, toast } from 'react-hot-toast';
+import { Bars3Icon } from '@heroicons/react/24/outline';
 import SidePanel from '@/components/SidePanel';
 import TodoDetail from '@/components/TodoDetail';
 
@@ -146,6 +147,17 @@ export default function Home() {
         data-aos="fade-left"
         data-aos-delay="200"
       >
+        {/* Mobile sidebar toggle button */}
+        {isMobile && !isSidePanelOpen && (
+          <button
+            onClick={() => setIsSidePanelOpen(true)}
+            className="fixed top-4 left-4 z-10 p-2 rounded-md bg-slate-700 text-yellow-400 hover:bg-slate-600 transition-colors duration-200 shadow-lg"
+            aria-label="Open sidebar"
+          >
+            <Bars3Icon className="h-6 w-6" />
+          </button>
+        )}
+        
         {selectedTodo ? (
           <TodoDetail todo={selectedTodo} onUpdateTodo={handleUpdateTodo} />
         ) : (
@@ -162,7 +174,7 @@ export default function Home() {
                 data-aos="flip-up"
                 data-aos-delay="600"
               />
-              <h2 className="text-xl font-medium text-slate-200 mb-2">No Todo Selected</h2>
+              <h2 className="text-xl font-medium text-yellow-400 mb-2">No Todo Selected</h2>
               <p className="text-slate-400">
                 {todos.length > 0 
                   ? 'Select a todo from the sidebar or create a new one to get started'

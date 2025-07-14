@@ -70,10 +70,10 @@ export default function SidePanel({
   const panel = (
     <div className="flex h-full flex-col bg-slate-800/90 backdrop-blur-sm shadow-lg">
       <div className="flex items-center justify-between p-4 border-b border-slate-700 bg-gradient-to-r from-blue-800 to-indigo-900 text-white">
-        <h2 className="text-lg font-medium">Todos</h2>
+        <h2 className="text-lg font-medium text-yellow-400">Todos</h2>
         <button
           onClick={() => setIsCreateModalOpen(true)}
-          className="px-4 py-2 bg-slate-700 text-blue-300 rounded-md hover:bg-slate-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+          className="px-4 py-2 bg-slate-700 text-yellow-400 rounded-md hover:bg-slate-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           data-aos="zoom-in"
           data-aos-delay="300"
         >
@@ -83,7 +83,7 @@ export default function SidePanel({
       <div className="flex-1 overflow-y-auto">
         {isLoading ? (
           <div className="flex justify-center items-center h-32">
-            <div className="animate-pulse text-slate-400">Loading todos...</div>
+            <div className="animate-pulse text-yellow-400">Loading todos...</div>
           </div>
         ) : (
           <ul className="divide-y divide-slate-700">
@@ -97,7 +97,7 @@ export default function SidePanel({
                 <div className="flex items-center justify-between p-4">
                   <button
                     onClick={() => onTodoClick(todo)}
-                    className="text-sm font-medium text-slate-200 hover:text-blue-300 transition-colors duration-300 flex-1 text-left"
+                    className="text-sm font-medium text-slate-200 hover:text-yellow-400 transition-colors duration-300 flex-1 text-left"
                   >
                     {todo.title}
                   </button>
@@ -145,12 +145,12 @@ export default function SidePanel({
                     <Dialog.Panel className="pointer-events-auto w-80">
                       <div className="flex h-full flex-col bg-slate-800 shadow-xl">
                         <div className="flex items-center justify-between p-4 border-b border-slate-700 bg-gradient-to-r from-blue-800 to-indigo-900 text-white">
-                          <Dialog.Title className="text-lg font-medium">
+                          <Dialog.Title className="text-lg font-medium text-yellow-400">
                             Todos
                           </Dialog.Title>
                           <button 
                             onClick={() => setIsOpen(false)}
-                            className="text-white hover:text-blue-200 transition-colors duration-300"
+                            className="text-yellow-400 hover:text-yellow-300 transition-colors duration-300"
                           >
                             <XMarkIcon className="h-6 w-6" />
                           </button>
@@ -250,7 +250,7 @@ function CreateTodoModal({
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-800 p-6 text-left align-middle shadow-xl transition-all border border-slate-700">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg  leading-6 font-bold text-yellow-400 "
+                  className="text-lg leading-6 font-bold text-yellow-400"
                 >
                   Create New Todo
                 </Dialog.Title>
@@ -262,7 +262,7 @@ function CreateTodoModal({
                     <input
                       type="text"
                       id="todoTitle"
-                      className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-slate-200"
+                      className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
                       placeholder="Enter todo title"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
@@ -273,14 +273,14 @@ function CreateTodoModal({
                   <div className="mt-6 flex justify-end space-x-3">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-slate-600 bg-slate-700 px-4 py-2 text-sm font-medium text-slate-300 shadow-sm hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800"
+                      className="inline-flex justify-center rounded-md border border-slate-600 bg-slate-700 px-4 py-2 text-sm font-medium text-slate-300 shadow-sm hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-800"
                       onClick={() => setIsOpen(false)}
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-700 px-4 py-2 text-sm font-medium text-yellow-400 shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-800"
                     >
                       Create
                     </button>
@@ -338,7 +338,7 @@ function DeleteConfirmationModal({
                   </div>
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-slate-200"
+                    className="text-lg font-medium leading-6 text-yellow-400"
                   >
                     Delete Todo
                   </Dialog.Title>
@@ -353,7 +353,7 @@ function DeleteConfirmationModal({
                 <div className="mt-6 flex justify-end space-x-3">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-slate-600 bg-slate-700 px-4 py-2 text-sm font-medium text-slate-300 shadow-sm hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800"
+                    className="inline-flex justify-center rounded-md border border-slate-600 bg-slate-700 px-4 py-2 text-sm font-medium text-slate-300 shadow-sm hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-800"
                     onClick={() => setIsOpen(false)}
                   >
                     Cancel

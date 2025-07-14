@@ -49,7 +49,7 @@ export default function SignIn() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 p-4">
       <div className="w-full max-w-md rounded-2xl bg-slate-800 p-8 shadow-xl border border-slate-700">
-        <h1 className="mb-6 text-center text-2xl font-bold text-slate-200">Sign In</h1>
+        <h1 className="mb-6 text-center text-2xl font-bold text-yellow-400">Sign In</h1>
         
         {error && (
           <div className="mb-4 rounded-md bg-red-900/30 p-3 text-red-300">
@@ -59,7 +59,7 @@ export default function SignIn() {
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-slate-300">
+            <label htmlFor="email" className="block text-sm font-medium text-yellow-300">
               Email
             </label>
             <input
@@ -73,7 +73,7 @@ export default function SignIn() {
           </div>
           
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-slate-300">
+            <label htmlFor="password" className="block text-sm font-medium text-yellow-300">
               Password
             </label>
             <input
