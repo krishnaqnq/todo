@@ -15,7 +15,18 @@ export async function GET() {
     
     await connectDB();
     const todos = await Todo.find({ user: session.user.id }).sort({ createdAt: -1 });
-    return NextResponse.json(todos);
+    
+    // Ensure all items have targetDate and status fields with defaults
+    const processedTodos = todos.map((todo: any) => ({
+      ...todo.toObject(),
+      items: todo.items.map((item: any) => ({
+        ...item.toObject(),
+        targetDate: item.targetDate || undefined,
+        status: item.status || 'ETS'
+      }))
+    }));
+    
+    return NextResponse.json(processedTodos);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch todos' }, { status: 500 });
   }

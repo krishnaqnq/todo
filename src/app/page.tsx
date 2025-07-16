@@ -16,6 +16,9 @@ interface Item {
   points?: number;
   links?: string[];
   images?: string[];
+  createdAt: string;
+  targetDate?: string;
+  status?: 'ETS' | 'IN_PROGRESS' | 'COMPLETED';
 }
 
 interface Todo {
@@ -23,6 +26,8 @@ interface Todo {
   title: string;
   items: Item[];
   user: string;
+  createdAt: string;
+  targetDate?: string;
 }
 
 export default function Home() {
@@ -69,9 +74,13 @@ export default function Home() {
     }
   };
 
-  const handleCreateTodo = async (title: string) => {
+  const handleCreateTodo = async (title: string, targetDate?: string) => {
     try {
-      const response = await axios.post('/api/todos', { title, items: [] });
+      const response = await axios.post('/api/todos', { 
+        title, 
+        items: [],
+        targetDate: targetDate ? new Date(targetDate).toISOString() : undefined
+      });
       setTodos([response.data, ...todos]);
       setSelectedTodo(response.data);
       toast.success('Todo created successfully');
@@ -136,6 +145,7 @@ export default function Home() {
           onTodoClick={(todo: Todo) => setSelectedTodo(todo)}
           onCreateTodo={handleCreateTodo}
           onDeleteTodo={handleDeleteTodo}
+          onUpdateTodo={handleUpdateTodo}
           isMobile={isMobile}
           isOpen={isSidePanelOpen}
           setIsOpen={setIsSidePanelOpen}

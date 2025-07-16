@@ -49,6 +49,12 @@ const ItemSchema = new mongoose.Schema({
   points: Number,
   links: [String],
   images: [String],
+  targetDate: { type: Date },
+  status: { 
+    type: String, 
+    enum: ['ETS', 'IN_PROGRESS', 'COMPLETED'], 
+    default: 'ETS' 
+  },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 }, { _id: true });
@@ -65,6 +71,7 @@ const TodoSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
+  targetDate: { type: Date },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });

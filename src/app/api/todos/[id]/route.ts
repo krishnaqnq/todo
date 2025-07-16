@@ -25,7 +25,17 @@ export async function GET(
       return NextResponse.json({ error: 'Todo not found' }, { status: 404 });
     }
     
-    return NextResponse.json(todo);
+    // Ensure all items have targetDate and status fields with defaults
+    const processedTodo = {
+      ...todo.toObject(),
+      items: todo.items.map((item: any) => ({
+        ...item.toObject(),
+        targetDate: item.targetDate || undefined,
+        status: item.status || 'ETS'
+      }))
+    };
+    
+    return NextResponse.json(processedTodo);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch todo' }, { status: 500 });
   }
@@ -48,12 +58,36 @@ export async function PUT(
     const data = await request.json();
 
     if (data.items) {
+      console.log('Processing items:', JSON.stringify(data.items, null, 2));
       data.items = data.items.map((item: any) => {
         if (item._id && item._id.startsWith('temp_')) {
           const { _id, ...itemWithoutId } = item;
+          // Ensure createdAt is set for new items
+          if (!itemWithoutId.createdAt) {
+            itemWithoutId.createdAt = new Date().toISOString();
+          }
+          // Ensure targetDate is properly formatted if it exists
+          if (itemWithoutId.targetDate) {
+            itemWithoutId.targetDate = new Date(itemWithoutId.targetDate);
+          }
+          // Ensure status is properly set for new items
+          if (!itemWithoutId.status) {
+            itemWithoutId.status = 'ETS';
+          }
+          console.log('Processed new item:', JSON.stringify(itemWithoutId, null, 2));
           return itemWithoutId;
+        } else {
+          // For existing items, ensure targetDate is properly formatted
+          if (item.targetDate) {
+            item.targetDate = new Date(item.targetDate);
+          }
+          // Ensure status is properly set for existing items
+          if (!item.status) {
+            item.status = 'ETS';
+          }
+          console.log('Processed existing item:', JSON.stringify(item, null, 2));
+          return item;
         }
-        return item;
       });
     }
     
