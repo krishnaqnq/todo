@@ -378,7 +378,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                   type="text"
                   name="name"
                   defaultValue={currentItem?.name || ''}
-                  className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 />
               </div>
               <div>
@@ -399,7 +399,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                   type="number"
                   name="points"
                   defaultValue={currentItem?.points || ''}
-                  className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 block p-2 w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 />
               </div>
               <div>
@@ -420,7 +420,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                   type="date"
                   name="targetDate"
                   defaultValue={currentItem?.targetDate ? new Date(currentItem.targetDate).toISOString().split('T')[0] : ''}
-                  className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 />
               </div>
               <div>
@@ -430,7 +430,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                 <select
                   name="status"
                   defaultValue={currentItem?.status || 'ETS'}
-                  className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 >
                   <option value="ETS">ETS</option>
                   <option value="IN_PROGRESS">IN PROGRESS</option>
@@ -445,7 +445,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                 <textarea
                   name="images"
                   defaultValue={currentItem?.images?.join('\n') || ''}
-                  className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 />
               </div>
               <div className="flex justify-end space-x-3 pt-4">

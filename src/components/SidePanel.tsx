@@ -373,7 +373,7 @@ function CreateTodoModal({
                     <input
                       type="text"
                       id="todoTitle"
-                      className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
+                      className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
                       placeholder="Enter todo title"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
@@ -387,7 +387,7 @@ function CreateTodoModal({
                     <input
                       type="date"
                       id="todoTargetDate"
-                      className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
+                      className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
                       value={targetDate}
                       onChange={(e) => setTargetDate(e.target.value)}
                     />
@@ -477,25 +477,25 @@ function EditTodoModal({
                     <input
                       type="text"
                       id="editTodoTitle"
-                      className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
+                      className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
                       placeholder="Enter todo title"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
                       autoFocus
                     />
                   </div>
-                  <div className="mt-4">
+                  {/* <div className="mt-4">
                     <label htmlFor="editTodoTargetDate" className="block text-sm font-medium text-slate-300">
                       Target Date (Optional)
                     </label>
                     <input
                       type="date"
                       id="editTodoTargetDate"
-                      className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
+                      className="mt-1 block w-full p-2 rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
                       value={targetDate}
                       onChange={(e) => setTargetDate(e.target.value)}
                     />
-                  </div>
+                  </div> */}
 
                   <div className="mt-6 flex justify-end space-x-3">
                     <button
