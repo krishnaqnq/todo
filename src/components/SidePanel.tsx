@@ -110,12 +110,12 @@ export default function SidePanel({
   );
 
   const panel = (
-    <div className="flex h-full flex-col bg-slate-800/90 backdrop-blur-sm shadow-lg">
-      <div className="flex items-center justify-between p-4 border-b border-slate-700 bg-gradient-to-r from-blue-800 to-indigo-900 text-white">
+    <div className="flex h-full flex-col bg-black backdrop-blur-sm shadow-lg">
+      <div className="flex items-center justify-between p-4 border-b border-gray-300 bg-gradient-to-r from-blue-800 to-indigo-900 text-white">
         <h2 className="text-lg  text-white font-bold text-md">Todos</h2>
         <button
           onClick={() => setIsCreateModalOpen(true)}
-          className="px-4 py-2 bg-slate-700 text-white font-bold text-xl rounded-md hover:bg-slate-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+          className="px-4 py-2 bg-black text-white font-bold text-xl rounded-md hover:bg-slate-900 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           data-aos="zoom-in"
           data-aos-delay="300"
         >
@@ -131,7 +131,7 @@ export default function SidePanel({
               placeholder="Search Project..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-md text-slate-200 placeholder-slate-400 focus:border-yellow-400 focus:ring-yellow-400 transition-all duration-300"
+              className="w-full px-4 py-2 bg-slate-900 border border-gray-300 rounded-md text-slate-200 placeholder-slate-400 focus:border-yellow-400 focus:ring-yellow-400 transition-all duration-300"
             />
             {searchQuery && (
               <button
@@ -153,7 +153,7 @@ export default function SidePanel({
             {filteredTodos.map((todo, index) => (
               <li 
                 key={todo._id} 
-                className="hover:bg-slate-700 transition-all duration-300"
+                className="hover:bg-slate-900 transition-all duration-300"
                 data-aos="fade-up"
                 data-aos-delay={100 + index * 50}
               >
@@ -177,13 +177,13 @@ export default function SidePanel({
                   <div className="flex items-center space-x-2 ml-4">
                     <button
                       onClick={() => handleEditClick(todo)}
-                      className="text-yellow-400 hover:text-yellow-300 transition-colors duration-300 p-1.5 rounded-full hover:bg-slate-600"
+                      className="text-yellow-400 hover:text-yellow-300 transition-colors duration-300 p-1.5 rounded-full hover:bg-slate-900"
                     >
                       <PencilIcon className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => handleDeleteClick(todo._id)}
-                      className="text-red-400 hover:text-red-300 transition-colors duration-300 p-1.5 rounded-full hover:bg-slate-600"
+                      className="text-red-400 hover:text-red-300 transition-colors duration-300 p-1.5 rounded-full hover:bg-slate-900"
                     >
                       <TrashIcon className="h-4 w-4" />
                     </button>
@@ -224,8 +224,8 @@ export default function SidePanel({
                     leaveTo="-translate-x-full"
                   >
                     <Dialog.Panel className="pointer-events-auto w-80">
-                      <div className="flex h-full flex-col bg-slate-800 shadow-xl">
-                        <div className="flex items-center justify-between p-4 border-b border-slate-700 bg-gradient-to-r from-blue-800 to-indigo-900 text-white">
+                      <div className="flex h-full flex-col bg-slate-900 shadow-xl">
+                        <div className="flex items-center justify-between p-4 border-b border-gray-300 bg-gradient-to-r from-blue-800 to-indigo-900 text-white">
                           <Dialog.Title className="text-lg font-medium text-yellow-400">
                             Todos
                           </Dialog.Title>
@@ -358,7 +358,7 @@ function CreateTodoModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-800 p-6 text-left align-middle shadow-xl transition-all border border-slate-700">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-black p-6 text-left align-middle shadow-xl transition-all border border-slate-700">
                 <Dialog.Title
                   as="h3"
                   className="text-lg leading-6 font-bold text-yellow-400"
@@ -373,7 +373,7 @@ function CreateTodoModal({
                     <input
                       type="text"
                       id="todoTitle"
-                      className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
+                      className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-black shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
                       placeholder="Enter todo title"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
@@ -396,14 +396,14 @@ function CreateTodoModal({
                   <div className="mt-6 flex justify-end space-x-3">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-slate-600 bg-slate-700 px-4 py-2 text-sm font-medium text-slate-300 shadow-sm hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-800"
+                      className="inline-flex justify-center rounded-md border border-gray-300 bg-black px-4 py-2 text-sm font-medium text-slate-300 shadow-sm hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-900"
                       onClick={() => setIsOpen(false)}
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-700 px-4 py-2 text-sm font-medium text-yellow-400 shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-800"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-700 px-4 py-2 text-sm font-medium text-yellow-400 shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-900"
                     >
                       Create
                     </button>
@@ -462,7 +462,7 @@ function EditTodoModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-800 p-6 text-left align-middle shadow-xl transition-all border border-slate-700">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-black p-6 text-left align-middle shadow-xl transition-all border border-gray-300">
                 <Dialog.Title
                   as="h3"
                   className="text-lg leading-6 font-bold text-yellow-400"
@@ -477,7 +477,7 @@ function EditTodoModal({
                     <input
                       type="text"
                       id="editTodoTitle"
-                      className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
+                      className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-black shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200"
                       placeholder="Enter todo title"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
@@ -500,7 +500,7 @@ function EditTodoModal({
                   <div className="mt-6 flex justify-end space-x-3">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-slate-600 bg-slate-700 px-4 py-2 text-sm font-medium text-slate-300 shadow-sm hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-800"
+                      className="inline-flex justify-center rounded-md border border-gray-300 bg-slate-900 px-4 py-2 text-sm font-medium text-slate-300 shadow-sm hover:bg-black focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-800"
                       onClick={() => setIsOpen(false)}
                     >
                       Cancel

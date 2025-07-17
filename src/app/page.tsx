@@ -135,7 +135,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 shadow-lg">
+    <div className="flex h-screen overflow-hidden bg-black shadow-lg">
       <div 
         data-aos="fade-right" 
         data-aos-duration="800"

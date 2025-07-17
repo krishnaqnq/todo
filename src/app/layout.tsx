@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-yellow-400`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-black min-h-screen text-yellow-400`}
       >
         <AuthProvider>
           <AOSInitializer>

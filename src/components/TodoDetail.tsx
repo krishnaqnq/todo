@@ -116,7 +116,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <div
-        className="flex justify-between items-center mb-6 bg-slate-800 rounded-lg shadow-md p-4 border border-slate-700"
+        className="flex justify-between items-center mb-6 bg-slate-900 rounded-lg shadow-md p-4 border border-gray-300"
         data-aos="fade-down"
       >
         <div className="flex-1">
@@ -141,14 +141,14 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
       </div>
 
       {/* Search Input */}
-      <div className="mb-4 p-4 bg-slate-800 rounded-lg border border-slate-700">
+      <div className="mb-4 p-4 bg-slate-900 rounded-lg border border-gray-300">
         <div className="relative">
           <input
             type="text"
             placeholder="Search items by name or notes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-md text-slate-200 placeholder-slate-400 focus:border-yellow-400 focus:ring-yellow-400 transition-all duration-300"
+            className="w-full px-4 py-2 bg-black border border-gray-300 rounded-md text-slate-200 placeholder-slate-400 focus:border-yellow-400 focus:ring-yellow-400 transition-all duration-300"
           />
           {searchQuery && (
             <button
@@ -162,7 +162,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
       </div>
 
       <div
-        className="overflow-x-auto rounded-xl shadow-lg border border-slate-700 bg-slate-800"
+        className="overflow-x-auto rounded-xl shadow-lg border border-gray-300 bg-slate-900"
         data-aos="fade-up"
         data-aos-delay="300"
       >
@@ -198,13 +198,13 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
               </th>
             </tr>
           </thead>
-          <tbody className="bg-slate-800 divide-y divide-slate-700">
+          <tbody className="bg-black divide-y divide-slate-700">
             {filteredItems.map((item, index) => {
               console.log('Rendering item:', item._id, 'with status:', item.status);
               return (
                 <tr
                   key={item._id}
-                  className="hover:bg-slate-700 transition-all duration-300"
+                  className="hover:bg-slate-900 transition-all duration-300"
                   data-aos="fade-up"
                   data-aos-delay={100 + index * 50}
                 >
@@ -288,7 +288,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                   </button>
                   <button
                     onClick={() => handleDeleteItem(item._id)}
-                    className="text-red-400 hover:text-red-300 p-1.5 rounded-full hover:bg-slate-600 transition-all duration-300"
+                    className="text-red-400 hover:text-red-300 p-1.5 rounded-full hover:bg-slate-900 transition-all duration-300"
                   >
                     <TrashIcon className="h-5 w-5" />
                   </button>
@@ -323,10 +323,10 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
         className="fixed z-10 inset-0 overflow-y-auto"
       >
         <div className="flex items-center justify-center min-h-screen p-4">
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" aria-hidden="true" />
+          <div className="fixed inset-0 bg-black backdrop-blur-sm" aria-hidden="true" />
 
           <div
-            className="relative bg-slate-800 rounded-2xl w-full max-w-md mx-4 p-6 shadow-2xl border border-slate-700"
+            className="relative bg-black00 rounded-2xl w-full max-w-md mx-4 p-6 shadow-2xl border border-gray-300"
             data-aos="zoom-in"
           >
             <h3 className="text-lg font-medium mb-4 text-center bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
@@ -378,7 +378,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                   type="text"
                   name="name"
                   defaultValue={currentItem?.name || ''}
-                  className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 />
               </div>
               <div>
@@ -388,7 +388,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                 <textarea
                   name="notes"
                   defaultValue={currentItem?.notes || ''}
-                  className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 block w-full rounded-md border-gray-300 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 />
               </div>
               <div>
@@ -399,7 +399,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                   type="number"
                   name="points"
                   defaultValue={currentItem?.points || ''}
-                  className="mt-1 block p-2 w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 block p-2 w-full rounded-md border-gray-300 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 />
               </div>
               <div>
@@ -409,7 +409,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                 <textarea
                   name="links"
                   defaultValue={currentItem?.links?.join('\n') || ''}
-                  className="mt-1 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 block w-full rounded-md border-gray-300 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 />
               </div>
               <div>
@@ -420,7 +420,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                   type="date"
                   name="targetDate"
                   defaultValue={currentItem?.targetDate ? new Date(currentItem.targetDate).toISOString().split('T')[0] : ''}
-                  className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 />
               </div>
               <div>
@@ -430,7 +430,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                 <select
                   name="status"
                   defaultValue={currentItem?.status || 'ETS'}
-                  className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 >
                   <option value="ETS">ETS</option>
                   <option value="IN_PROGRESS">IN PROGRESS</option>
@@ -445,14 +445,14 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                 <textarea
                   name="images"
                   defaultValue={currentItem?.images?.join('\n') || ''}
-                  className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
+                  className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-700 shadow-sm focus:border-yellow-400 focus:ring-yellow-400 text-slate-200 transition-all duration-300"
                 />
               </div>
               <div className="flex justify-end space-x-3 pt-4">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 text-sm font-medium text-slate-300 bg-slate-700 rounded-md hover:bg-slate-600 transition-colors duration-300 border border-slate-600"
+                  className="px-4 py-2 text-sm font-medium text-slate-300 bg-slate-700 rounded-md hover:bg-slate-600 transition-colors duration-300 border border-gray-300"
                 >
                   Cancel
                 </button>

@@ -63,7 +63,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-slate-800 shadow-md border-b border-slate-700">
+      <header className="bg-black shadow-md border-b border-gray-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
@@ -79,14 +79,14 @@ export default function Header() {
                 <div className="relative">
                   <button
                     onClick={toggleDropdown}
-                    className="flex items-center space-x-2 bg-slate-700 py-2 px-3 rounded-md hover:bg-slate-600 transition-colors duration-200"
+                    className="flex items-center space-x-2 bg-black py-2 px-3 rounded-md hover:bg-slate-900 transition-colors duration-200"
                   >
                     <UserIcon className="h-5 w-5  bg-gradient-to-r from-pink-500 to-green-300 bg-clip-text text-transparen " />
                     <span className="bg-gradient-to-r text-sm from-pink-500 to-green-400 bg-clip-text text-transparent">{session.user.name}</span>
                   </button>
                   
                   {isDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-slate-700 rounded-md shadow-lg py-1 z-10 border border-slate-600">
+                    <div className="absolute right-0 mt-2 w-48 bg-black rounded-md shadow-lg py-1 z-10 border border-gray-200">
                       <div className="px-4 py-2 text-sm text-yellow-400 border-b border-slate-600">
                         Signed in as <span className="font-medium">{session.user.email}</span>
                       </div>
@@ -138,9 +138,9 @@ export default function Header() {
         className="fixed z-50 inset-0 overflow-y-auto"
       >
         <div className="flex items-center justify-center min-h-screen p-4">
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" aria-hidden="true" />
+          <div className="fixed inset-0 bg-black backdrop-blur-sm" aria-hidden="true" />
 
-          <div className="relative bg-slate-800 rounded-2xl w-full max-w-md mx-4 p-6 shadow-2xl border border-slate-700">
+          <div className="relative bg-black rounded-2xl w-full max-w-md mx-4 p-6 shadow-2xl border border-gray-300">
             <h3 className="text-lg font-medium mb-4 text-center bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
               Change Password
             </h3>
