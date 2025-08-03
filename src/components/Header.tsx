@@ -81,8 +81,8 @@ export default function Header() {
                     onClick={toggleDropdown}
                     className="flex items-center space-x-2 bg-black py-2 px-3 rounded-md hover:bg-slate-900 transition-colors duration-200"
                   >
-                    <UserIcon className="h-5 w-5  bg-gradient-to-r from-pink-500 to-green-300 bg-clip-text text-transparen " />
-                    <span className="bg-gradient-to-r text-sm from-pink-500 to-green-400 bg-clip-text text-transparent">{session.user.name}</span>
+                    <UserIcon className="h-5 w-5 text-white " />
+                    <span className="text-sm text-white">{session.user.name}</span>
                   </button>
                   
                   {isDropdownOpen && (

@@ -205,8 +205,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                 <tr
                   key={item._id}
                   className="hover:bg-slate-900 transition-all duration-300"
-                  data-aos="fade-up"
-                  data-aos-delay={100 + index * 50}
+            
                 >
                 <td className="px-6 py-4 whitespace-nowrap font-medium text-slate-300">{item.name || '-'}</td>
                 <td className="px-6 py-4 text-slate-300">{item.notes || '-'}</td>
@@ -236,6 +235,7 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <select
+                
                     key={`${item._id}-${item.status}`}
                     value={item.status || 'ETS'}
                     onChange={(e) => {
@@ -244,10 +244,10 @@ export default function TodoDetail({ todo, onUpdateTodo }: TodoDetailProps) {
                       handleStatusChange(item._id, newStatus);
                     }}
                     className={`px-3 py-1 rounded-full text-xs font-medium border-0 focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ${item.status === 'COMPLETED'
-                        ? 'bg-green-900/50 text-green-400 hover:bg-green-800/50'
+                        ? 'bg-green-900/50 text-green-400 hover:bg-green-800'
                         : item.status === 'IN_PROGRESS'
-                          ? 'bg-yellow-900/50 text-yellow-400 hover:bg-yellow-800/50'
-                          : 'bg-blue-900/50 text-blue-400 hover:bg-blue-800/50'
+                          ? 'bg-yellow-900/50 text-yellow-400 hover:bg-yellow-800'
+                          : 'bg-blue-900 text-blue-400 hover:bg-blue-800'
                       }`}
                   >
                     <option value="ETS">ETS</option>

@@ -19,6 +19,14 @@ const UserSchema = new mongoose.Schema({
     minlength: [6, 'Password should be at least 6 characters'],
     select: false, // Don't include password in query results by default
   },
+  resetToken: {
+    type: String,
+    select: false, // Don't include in query results by default
+  },
+  resetTokenExpiry: {
+    type: Date,
+    select: false, // Don't include in query results by default
+  },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

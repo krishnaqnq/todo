@@ -73,6 +73,7 @@ export default function Register() {
             <input
               id="name"
               type="text"
+              placeholder='Your Name'
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-slate-200"
@@ -87,6 +88,7 @@ export default function Register() {
             <input
               id="email"
               type="email"
+              placeholder='Your Email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-slate-200"
@@ -101,6 +103,7 @@ export default function Register() {
             <input
               id="password"
               type="password"
+              placeholder='Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-slate-200"
@@ -115,6 +118,7 @@ export default function Register() {
             <input
               id="confirmPassword"
               type="password"
+              placeholder='confirm password'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="mt-1 p-2 block w-full rounded-md border-slate-600 bg-slate-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-slate-200"
