@@ -5,9 +5,10 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { Toaster, toast } from 'react-hot-toast';
-import { Bars3Icon } from '@heroicons/react/24/outline';
+
 import SidePanel from '@/components/SidePanel';
 import TodoDetail from '@/components/TodoDetail';
+
 
 interface Item {
   _id: string;
@@ -53,8 +54,26 @@ export default function Home() {
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+
+    // Listen for sidebar open events from header
+    const handleOpenSidebar = (event: CustomEvent) => {
+      setIsSidePanelOpen(event.detail.isOpen);
+    };
+
+    window.addEventListener('openSidebar', handleOpenSidebar as EventListener);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('openSidebar', handleOpenSidebar as EventListener);
+    };
   }, []);
+
+  // Notify header about sidebar state changes
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('sidebarToggle', { 
+      detail: { isOpen: isSidePanelOpen } 
+    }));
+  }, [isSidePanelOpen]);
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -142,7 +161,13 @@ export default function Home() {
       >
         <SidePanel
           todos={todos}
-          onTodoClick={(todo: Todo) => setSelectedTodo(todo)}
+          onTodoClick={(todo: Todo) => {
+            setSelectedTodo(todo);
+            // Close sidebar in mobile view when a todo is selected
+            if (isMobile) {
+              setIsSidePanelOpen(false);
+            }
+          }}
           onCreateTodo={handleCreateTodo}
           onDeleteTodo={handleDeleteTodo}
           onUpdateTodo={handleUpdateTodo}
@@ -157,16 +182,7 @@ export default function Home() {
         data-aos="fade-left"
         data-aos-delay="200"
       >
-        {/* Mobile sidebar toggle button */}
-        {isMobile && !isSidePanelOpen && (
-          <button
-            onClick={() => setIsSidePanelOpen(true)}
-            className="fixed top-4 left-4 z-10 p-2 rounded-md bg-slate-700 text-yellow-400 hover:bg-slate-600 transition-colors duration-200 shadow-lg"
-            aria-label="Open sidebar"
-          >
-            <Bars3Icon className="h-6 w-6" />
-          </button>
-        )}
+
         
         {selectedTodo ? (
           <TodoDetail todo={selectedTodo} onUpdateTodo={handleUpdateTodo} />

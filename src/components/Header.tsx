@@ -1,21 +1,63 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { UserIcon, ArrowRightOnRectangleIcon, KeyIcon } from '@heroicons/react/24/outline';
+import { UserIcon, ArrowRightOnRectangleIcon, KeyIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import { Dialog } from '@headlessui/react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
 export default function Header() {
   const { data: session, status } = useSession();
+  const pathname = usePathname();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  // Listen for sidebar state changes from the main page
+  useEffect(() => {
+    const handleSidebarToggle = (event: CustomEvent) => {
+      setIsSidePanelOpen(event.detail.isOpen);
+    };
+
+    window.addEventListener('sidebarToggle', handleSidebarToggle as EventListener);
+    
+    return () => {
+      window.removeEventListener('sidebarToggle', handleSidebarToggle as EventListener);
+    };
+  }, []);
+
+  const handleSidebarToggle = () => {
+    const newState = true;
+    setIsSidePanelOpen(newState);
+    
+    // Dispatch custom event to notify main page
+    window.dispatchEvent(new CustomEvent('openSidebar', { 
+      detail: { isOpen: newState } 
+    }));
+  };
+
+  // Only show sidebar toggle on the main page
+  const isMainPage = pathname === '/';
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -66,12 +108,24 @@ export default function Header() {
       <header className="bg-black shadow-md border-b border-gray-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex-shrink-0">
-              <Link href="/" className="text-xl font-bold text-white">
-                <span className="bg-gradient-to-r from-pink-500 to-green-300 bg-clip-text text-transparent">
-                  Project Todo
-                </span>
-              </Link>
+            <div className="flex items-center space-x-3">
+              {/* Mobile sidebar toggle */}
+              {isMainPage && isMobile && !isSidePanelOpen && (
+                <button
+                  onClick={handleSidebarToggle}
+                  className="p-2 rounded-md bg-slate-700 text-yellow-400 hover:bg-slate-600 transition-colors duration-200"
+                  aria-label="Open sidebar"
+                >
+                  <Bars3Icon className="h-6 w-6" />
+                </button>
+              )}
+              <div className="flex-shrink-0">
+                <Link href="/" className="text-xl font-bold text-white">
+                  <span className="bg-gradient-to-r from-pink-500 to-green-300 bg-clip-text text-transparent">
+                   Todo
+                  </span>
+                </Link>
+              </div>
             </div>
             
             <div className="ml-4 flex items-center">
